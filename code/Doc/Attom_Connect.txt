@@ -1,0 +1,27 @@
+01 - Download and install >>>> Remote Ftp
+02 - Create a configuration file
+
+replace "host" and "privatekey" with your IP and AWS_Key file path
+
+{
+    "protocol": "sftp",
+    "host": "3.10.198.5", // IP address of the AWS
+    "port": 22, // Port number of the server. Default: 22
+    "user": "ubuntu", // Username
+    "pass": "pass", // Password for password-based user authentication
+    "promptForPass": false, // boolean - Set to true for enable password/passphrase dialog.
+    "remote": "/home/ubuntu/", // paths start
+    "agent": "", // string - Path to ssh-agent's UNIX socket for ssh-agent-based user authentication.
+    "privatekey": "C:/Users/sssha/Desktop/AWS_IoT/AWS_IoT.pem", // Absolute path to the private key file.
+    "passphrase": "", // For an encrypted private key.
+    "hosthash": "", // 'md5' or 'sha1'. The host's key is hashed using this method and passed to the hostVerifier function. Default: (none)
+    "ignorehost": true,
+    "connTimeout": 10000, //How long (in milliseconds) to wait for the SSH handshake to complete.
+    "keepalive": 10000, // How often (in milliseconds) to send SSH-level keepalive packets to the server.
+    "keyboardInteractive": false, // Set to true for enable verifyCode dialog.
+    "keyboardInteractiveForPass": false, // Set to true for enable keyboard interaction and use pass options for password.
+    "watchTimeout":500, // The duration ( in milliseconds ) from when the file was last changed for the upload to begin.
+    "filePermissions":"0644" // Permissions for uploaded files.
+}
+
+03 - Connect to the AWS

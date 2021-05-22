@@ -1,0 +1,68 @@
+////////////////////////////// SETUP AWS ////////////////////////////// 
+
+Step 0: Singup a AWS IOT account
+
+Step 1: Choose an Amazon Machine Image
+	Ubuntu Server 20.04 LTS
+
+Step 2: Chosse an Instance Type
+	Default
+
+Step 3: Configure Instance Details
+	Default
+
+Step 4: Add Storage
+	Default
+
+Step 5: Add Tags
+
+	Key:	Esp32
+	Value:	AWS-IoT
+
+Step 6: Configure Security Group
+
+	Security Group Name:	AWS-security
+	Default:		AWS-security
+
+	HTTP		PORT 80
+	Custom TCP	PORT 8080
+	Custom TCP	PORT 1883	Anywhere
+	Custom TCP 	PORT 9001	Anywhere
+
+Step 7: Review and Launch the Instance 
+Step 8: Crete and Save a key
+Step 9: Connect SSH
+
+	ssh -i "KEY_NAME.pem" ubuntu@IP_ADDERSS
+	
+Step 10: Setup AWS EC2
+
+	sudo apt-get update
+	sudo apt-get upgrade -y
+	python3 --version
+	sudo apt-get install python3-pip
+	sudo pip3 install flask
+	sudo pip3 install flask_mqtt
+	sudo apt-get install git -y
+
+	sudo apt-get install mosquitto mosquitto-clients
+	cd /etc/mosquitto/
+	cd conf.d
+	sudo nano default.conf
+		listener 1883
+		listener 9001
+		protocol websockets
+		allow_anonymous false
+		password_file /etc/mosquitto/passwd
+
+	sudo mosquitto_passwd -c /etc/mosquitto/passwd username   << this is your mqtt passwd and username
+	sudo systemctl restart mosquitto.service
+
+Step 11: Upload the Program
+
+	cd
+	sudo git clone https://github.com/LMJayasundara/ESP32_IoT
+	cd ESP32_IoT/code/AWS
+	sudo chmod -R 777 /ESP32_IoT/code/AWS
+	sudo nano app.py              ----replaced the passwd username and mail
+	sudo python3 app.py
